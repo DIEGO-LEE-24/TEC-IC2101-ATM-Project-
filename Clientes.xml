@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<clientes>
+    <cliente>
+        <email>1234@estudiantec.cr</email>
+        <telefono>12341234</telefono>
+    </cliente>
+    <cliente>
+        <email>1234@estudiantec.cr</email>
+        <telefono>12341234</telefono>
+    </cliente>
+    <cliente>
+        <email>1234@estudiantec.cr</email>
+        <fechaRegistro/>
+        <identificacion>12341234</identificacion>
+        <nombreCompleto>LEE SANGCHEOL</nombreCompleto>
+        <telefono>12345678</telefono>
+    </cliente>
+</clientes>
