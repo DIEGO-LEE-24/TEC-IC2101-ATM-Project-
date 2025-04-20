@@ -1,100 +1,170 @@
-# Project 1 – Object-Oriented Programming
+# Banco CR – Cajero Cardless (Proyecto 1)
 
-**Institution:** Tecnológico de Costa Rica  
-**Course:** IC2101 – Object-Oriented Programming  
-**Professor:** Luis Pablo Soto Chaves  
-**Student:**  
+**Curso**: IC2101 – Programación Orientada a Objetos I (I Semestre 2025)  
+**Profesor**: Luis Pablo Soto Chaves  
+**Integrantes**: (Agregar nombres de equipo)
 
 ---
 
-## 📦 Project Structure (ZIP)
+## 📋 Descripción
+Implementación de un Cajero Automático sin tarjeta (Cardless ATM) basado en Java y Swing, aplicando:
+- Paradigma orientado a objetos (MVC).  
+- Validación de entradas con expresiones regulares.  
+- Persistencia en XML.  
+- Encriptación de PIN (AES).  
+- Simulación de servicios externos (BCCR, SMS).  
 
+## 🛠 Tecnologías y Herramientas
+- Java 17  
+- Swing (interfaz gráfica)  
+- NetBeans / Ant (`build.xml`)  
+- XML (JAXB o parser manual)  
+- Git & GitHub (control de versiones)  
+
+## 🚀 Ejecución
+1. **Clonar repositorio**
+   ```bash
+   git clone https://github.com/YourUser/TEC-IC2101-ATM-Project.git
+   cd TEC-IC2101-ATM-Project
+   ```
+2. **Abrir en NetBeans** (o ejecutarlo desde tu IDE favorito)  
+3. **Compilar y ejecutar**
+   - Desde NetBeans: `Run Main.java`  
+   - Por línea de comandos con Ant:
+     ```bash
+     ant run
+     ```
+
+## 📂 Estructura de directorios
 ```
-Proyecto1_CajeroCardless/
-│
-├── codigo/
-│   ├── Main.java
-│   ├── VistaGUI.java
-│   ├── controlador/
-│   │   └── ControladorCajero.java
-│   ├── modelo/
-│   │   ├── Cliente.java
-│   │   ├── Cuenta.java
-│   │   ├── Transaccion.java
-│   │   ├── EstadoCuenta.java
-│   │   ├── Cifrado.java
-│   │   ├── Validacion.java
-│   │   ├── ServicioSMS.java
-│   │   ├── ServicioBCCR.java
-│   │   ├── TipoTransaccion.java
-│   │   └── excepciones/
-│   │       ├── PinInvalidoException.java
-│   │       └── SaldoInsuficienteException.java
-│   ├── persistencia/
-│   │   ├── Persistencia.java
-│   │   ├── PersistenciaXML.java
-│   │   ├── ClienteList.java
-│   │   ├── CuentaList.java
-│   │   └── TransaccionWrapper.java
-│
-├── xml/
-│   ├── Clientes.xml
-│   ├── Cuentas.xml
-│   └── Transacciones_CTA1.xml
-│
-├── documentacion/
-│   └── Documentacion_Final.pdf
-│
-└── README.md
+CajeroCardlessProyecto1/
+├── build/               # resultados de compilación
+├── lib/                 # bibliotecas externas (si aplica)
+├── nbproject/           # configuración de NetBeans
+├── src/
+│   ├── controlador/     # Controlador del flujo (MVC)
+│   ├── modelo/          # Clases de dominio y lógica de negocio
+│   ├── persistencia/    # Lectura/escritura de XML
+│   ├── excepciones/     # Excepciones personalizadas
+│   └── principal/       # Clase Main
+├── vista/               # Interfaz Swing (GUI)
+├── test/                # Pruebas unitarias (JUnit)
+├── build.xml            # Script de Ant
+├── Clientes.xml         # Datos iniciales de clientes
+├── Cuentas.xml          # Datos iniciales de cuentas
+├── Transacciones_CTA1.xml # Ejemplo de transacciones
+└── README.md            # Documentación del proyecto
 ```
 
----
+## ✅ Funcionalidades
+- **Gestión de Clientes**: Crear, cambiar teléfono y email.  
+- **Gestión de Cuentas**: Alta, cambio de PIN, baja.  
+- **Transacciones**:
+  - Depósito y retiro en colones y dólares  
+  - Comisión automática (primeras 5 gratuitas)  
+  - Ver historial y estado de cuenta  
+  - Transferencias internas (mismo dueño)  
+- **Seguridad**:
+  - Validación de PIN (formato alfanumérico, 6 caracteres)  
+  - Encriptación AES del PIN  
+  - Bloqueo tras 3 intentos fallidos (PIN o código SMS)  
+- **Servicios Externos (simulados)**:
+  - Consulta en tiempo real de tipo de cambio BCCR  
+  - Envío de palabra SMS para validación  
+- **Persistencia**:
+  - XML para clientes, cuentas y transacciones  
 
-## ▶️ Execution Instructions
-
-1. Open the project in NetBeans or another IDE compatible with Java 17.
-2. Run the main class: `Main.java`
-3. The GUI will launch, providing access to all ATM functionalities.
-
----
-
-## ✅ Implemented Features
-
-- Create client and account with input validation using regex.
-- Deposit in colones or dollars (with BCCR exchange rate).
-- Withdraw with PIN and SMS word verification (account blocked after 3 failed attempts).
-- Check balance (in colones and USD).
-- View transaction history.
-- View detailed account status (including encrypted PIN and commissions).
-- Transfer between accounts owned by the same client.
-- Change PIN, phone number, and email.
-- Delete accounts (also removes transaction XML).
-- Automatic XML persistence for clients, accounts, and transactions.
-- Full separation into model, view, controller, and persistence layers.
+## 📖 Documentación & Diseño
+- **`/documentacion/Documentacion_Final.pdf`**: Requisitos, diagramas UML (arquetectura y clases), matriz de cobertura y decisiones de diseño.  
+- **`/UML/`**: Diagramas fuente en formato XMI o PDF.  
 
 ---
 
-## 🔒 Technical Notes
+> **Nota**: Ajustar ramas y PRs según la [estrategia de Git](#).  
+> Para más detalles, revisar la carpeta `documentacion/`.
 
-- PIN encryption using AES (`Cifrado.java`).
-- Simulated connection to BCCR (`ServicioBCCR.java`).
-- SMS sending simulated via console (`ServicioSMS.java`).
-- Centralized validation logic (`Validacion.java`).
-- GUI implemented using `Swing` and `CardLayout`.
-- Custom exceptions for PIN and balance errors.
-- Interface-based connection between controller and model.
+# Banco CR – Cajero Cardless (Proyecto 1)
+
+**Curso**: IC2101 – Programación Orientada a Objetos I (I Semestre 2025)  
+**Profesor**: Luis Pablo Soto Chaves  
+**Integrantes**: (Agregar nombres de equipo)
+
+---
+
+## 📋 Descripción
+Implementación de un Cajero Automático sin tarjeta (Cardless ATM) basado en Java y Swing, aplicando:
+- Paradigma orientado a objetos (MVC).  
+- Validación de entradas con expresiones regulares.  
+- Persistencia en XML.  
+- Encriptación de PIN (AES).  
+- Simulación de servicios externos (BCCR, SMS).  
+
+## 🛠 Tecnologías y Herramientas
+- Java 17  
+- Swing (interfaz gráfica)  
+- NetBeans / Ant (`build.xml`)  
+- XML (JAXB o parser manual)  
+- Git & GitHub (control de versiones)  
+
+## 🚀 Ejecución
+1. **Clonar repositorio**
+   ```bash
+   git clone https://github.com/YourUser/TEC-IC2101-ATM-Project.git
+   cd TEC-IC2101-ATM-Project
+   ```
+2. **Abrir en NetBeans** (o ejecutarlo desde tu IDE favorito)  
+3. **Compilar y ejecutar**
+   - Desde NetBeans: `Run Main.java`  
+   - Por línea de comandos con Ant:
+     ```bash
+     ant run
+     ```
+
+## 📂 Estructura de directorios
+```
+CajeroCardlessProyecto1/
+├── build/               # resultados de compilación
+├── lib/                 # bibliotecas externas (si aplica)
+├── nbproject/           # configuración de NetBeans
+├── src/
+│   ├── controlador/     # Controlador del flujo (MVC)
+│   ├── modelo/          # Clases de dominio y lógica de negocio
+│   ├── persistencia/    # Lectura/escritura de XML
+│   ├── excepciones/     # Excepciones personalizadas
+│   └── principal/       # Clase Main
+├── vista/               # Interfaz Swing (GUI)
+├── test/                # Pruebas unitarias (JUnit)
+├── build.xml            # Script de Ant
+├── Clientes.xml         # Datos iniciales de clientes
+├── Cuentas.xml          # Datos iniciales de cuentas
+├── Transacciones_CTA1.xml # Ejemplo de transacciones
+└── README.md            # Documentación del proyecto
+```
+
+## ✅ Funcionalidades
+- **Gestión de Clientes**: Crear, cambiar teléfono y email.  
+- **Gestión de Cuentas**: Alta, cambio de PIN, baja.  
+- **Transacciones**:
+  - Depósito y retiro en colones y dólares  
+  - Comisión automática (primeras 5 gratuitas)  
+  - Ver historial y estado de cuenta  
+  - Transferencias internas (mismo dueño)  
+- **Seguridad**:
+  - Validación de PIN (formato alfanumérico, 6 caracteres)  
+  - Encriptación AES del PIN  
+  - Bloqueo tras 3 intentos fallidos (PIN o código SMS)  
+- **Servicios Externos (simulados)**:
+  - Consulta en tiempo real de tipo de cambio BCCR  
+  - Envío de palabra SMS para validación  
+- **Persistencia**:
+  - XML para clientes, cuentas y transacciones  
+
+## 📖 Documentación & Diseño
+- **`/documentacion/Documentacion_Final.pdf`**: Requisitos, diagramas UML (arquetectura y clases), matriz de cobertura y decisiones de diseño.  
+- **`/UML/`**: Diagramas fuente en formato XMI o PDF.  
 
 ---
 
-## 📝 Supporting Documentation
+> **Nota**: Ajustar ramas y PRs según la [estrategia de Git](#).  
+> Para más detalles, revisar la carpeta `documentacion/`.
 
-All theoretical content, design, and evidence are included in `documentacion/Documentacion_Final.pdf`, generated in LaTeX.
-
-This document includes:
-- Functional requirements
-- Full UML design (class and architecture diagrams)
-- Coverage matrix
-- Design decisions and technical debt report
-- GUI screenshots demonstrating functionality
-
----
