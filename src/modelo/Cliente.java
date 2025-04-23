@@ -33,7 +33,7 @@ public class Cliente {
         this.identificacion = identificacion.trim();
         this.telefono       = telefono;
         this.email          = email;
-        this.fechaRegistro  = LocalDateTime.now().toString(); /
+        this.fechaRegistro  = LocalDateTime.now().toString(); 
     }
 
     public String getNombreCompleto() {

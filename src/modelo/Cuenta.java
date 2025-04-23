@@ -2,7 +2,6 @@ package modelo;
 
 import excepciones.PinInvalidoException;
 import excepciones.SaldoInsuficienteException;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -174,7 +173,7 @@ public class Cuenta {
      * @param pinPlano PIN en texto plano
      * @return true si el PIN coincide
      */
-    private boolean verificarPin(String pinPlano) {
+    public boolean verificarPin(String pinPlano) {
         if (estatus == EstadoCuenta.INACTIVA) {
             return false;
         }
@@ -194,12 +193,12 @@ public class Cuenta {
         long comisionDeposito = 0, comisionRetiro = 0;
 
         for (Transaccion t : transacciones) {
-            if (t.getTipo() == Transaccion.TipoTransaccion.DEPOSITO) {
+            if (t.getTipo() == TipoTransaccion.DEPOSITO) {
                 totalDeposito += t.getMonto();
-                if (t.isCobraComision()) comisionDeposito += t.getComision();
+                if (t.isCobroComision()) comisionDeposito += t.getMontoComision();
             } else {
                 totalRetiro += t.getMonto();
-                if (t.isCobraComision()) comisionRetiro += t.getComision();
+                if (t.isCobroComision()) comisionRetiro += t.getMontoComision();
             }
         }
 
@@ -210,5 +209,9 @@ public class Cuenta {
                "Comisión depósitos: " + comisionDeposito + " ₡\n" +
                "Comisión retiros: " + comisionRetiro + " ₡\n" +
                "Total comisiones: " + (comisionDeposito + comisionRetiro) + " ₡\n";
+    }
+
+    public String getPinCifrado() {
+        return pinCifrado;
     }
 }

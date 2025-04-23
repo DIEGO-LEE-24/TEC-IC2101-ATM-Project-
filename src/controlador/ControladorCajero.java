@@ -21,6 +21,9 @@ public class ControladorCajero {
     private final Persistencia persistencia;
     private final List<Cliente> clientes;
     private final List<Cuenta> cuentas;
+    private String pinCifrado;
+    private boolean bloqueada;
+    private int intentosFallidos;
 
     public ControladorCajero(Persistencia persistencia) throws Exception {
         this.persistencia = persistencia;
@@ -68,6 +71,13 @@ private Cliente buscarCliente(String idCliente) {
         }
     }
 
+    
+    // Método auxiliar para cifrar el PIN 
+    private String cifrarPin(String pin) {
+        // Aquí deberías usar un algoritmo real de cifrado o hash seguro como SHA-256
+        return Integer.toString(pin.hashCode()); 
+    }
+    
     // — Operaciones públicas —
     public String obtenerEstadoCuenta(String numeroCuenta, String pin) throws Exception {
         Cuenta c = buscarCuenta(numeroCuenta);
@@ -120,7 +130,6 @@ private Cliente buscarCliente(String idCliente) {
         cuentas.add(nueva);
         guardarCuentas();
     }
-
 
 
 
@@ -253,6 +262,9 @@ private Cliente buscarCliente(String idCliente) {
     } 
 
 
+    public String getEstatus() {
+        return bloqueada ? "Bloqueada" : "Activa";
+    }
 
     /** Consultar estado de la cuenta (estatus y bloqueo) */
     public EstadoCuenta consultarEstadoCuenta(String numeroCuenta, String pin) throws Exception {
@@ -260,4 +272,5 @@ private Cliente buscarCliente(String idCliente) {
         c.verificarPin(pin);
         return c.getEstatus();
     }
+   
 }

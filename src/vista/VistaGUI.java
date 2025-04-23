@@ -589,7 +589,7 @@ private JPanel crearPanelCambioVenta() {
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
-        }    
+            
     });
 
     p.addPair("ID Cliente:", id);
@@ -616,7 +616,8 @@ private JPanel crearPanelEliminarCuenta() {
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }   
-    });
+    }})
+    ;
 
     p.addPair("Número Cuenta:", num);
     p.addPair("PIN:", pin);
@@ -646,6 +647,8 @@ private JPanel crearPanelEliminarCuenta() {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        });
-    }
+       
+        });}}
+    
+    
 
