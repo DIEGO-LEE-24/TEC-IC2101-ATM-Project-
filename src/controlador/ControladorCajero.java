@@ -219,7 +219,8 @@ public class ControladorCajero {
     public Transaccion depositarDolares(String numeroCuenta, double montoUsd) throws Exception {
         long colones = Math.round(montoUsd * ServicioBCCR.getTipoCompra());
         Cuenta c = buscarCuenta(numeroCuenta);
-        Transaccion t = c.depositar(colones);
+        c.depositar(colones);
+        Transaccion t= c.getTransacciones().get(c.getTransacciones().size() - 1); 
         guardarCuentas();
         return t;
     }

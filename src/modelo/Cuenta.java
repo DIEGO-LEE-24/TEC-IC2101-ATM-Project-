@@ -162,6 +162,10 @@ public class Cuenta {
 
     /**
      * Para persistencia: devuelve todas las transacciones sin validar PIN.
+     * Este método está destinado a ser utilizado por el subsistema de persistencia
+     * para guardar el historial de transacciones.
+     *
+     * @return Una copia inmutable de la lista de transacciones de la cuenta
      */
     public List<Transaccion> getTransacciones() {
         return List.copyOf(transacciones);
