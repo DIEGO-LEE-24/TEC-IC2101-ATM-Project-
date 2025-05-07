@@ -85,7 +85,7 @@ public class Cliente {
     public LocalDateTime getFechaRegistro() {
         return LocalDateTime.parse(fechaRegistro);
     }
-
+    
     @Override
     public String toString() {
         return nombreCompleto + " (" + identificacion + ")";

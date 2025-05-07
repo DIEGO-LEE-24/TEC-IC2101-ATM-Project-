@@ -1,18 +1,26 @@
 package modelo;
 
 import java.time.LocalDateTime;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Representa una transacción realizada sobre una cuenta bancaria:
  * depósito, retiro o transferencia, con posible comisión.
  */
+@XmlRootElement
 public class Transaccion {
-    private final TipoTransaccion tipo;
-    private final long monto;               // Monto en colones (o equivalente en colones)
-    private final LocalDateTime fecha;
-    private final boolean cobroComision;
-    private final long montoComision;       // 0 si no hubo cobro
+    private TipoTransaccion tipo;
+    private long monto;               // Monto en colones (o equivalente en colones)
+    private LocalDateTime fecha;
+    private boolean cobroComision;
+    private long montoComision;       // 0 si no hubo cobro
 
+    
+    public Transaccion() {
+        // JAXB necesita constructor sin argumentos
+    }
+        
+        
     /**
      * Construye una nueva transacción.
      *

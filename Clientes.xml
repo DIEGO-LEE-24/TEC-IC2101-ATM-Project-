@@ -10,9 +10,20 @@
     </cliente>
     <cliente>
         <email>1234@estudiantec.cr</email>
-        <fechaRegistro/>
         <identificacion>12341234</identificacion>
         <nombreCompleto>LEE SANGCHEOL</nombreCompleto>
         <telefono>12345678</telefono>
+    </cliente>
+    <cliente>
+        <email>mohamehd@gmail.com</email>
+        <identificacion>10110017</identificacion>
+        <nombreCompleto>Eyden Mohamed Su</nombreCompleto>
+        <telefono>88118811</telefono>
+    </cliente>
+    <cliente>
+        <email>es@gmail.com</email>
+        <identificacion>2</identificacion>
+        <nombreCompleto>a</nombreCompleto>
+        <telefono>11111111</telefono>
     </cliente>
 </clientes>

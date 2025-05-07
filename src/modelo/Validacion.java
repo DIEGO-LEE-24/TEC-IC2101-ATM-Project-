@@ -24,7 +24,10 @@ public class Validacion {
     public static String generarPinToken() {
         String parte1 = String.valueOf((int)(Math.random() * 90 + 10)); // 10~99
         String parte2 = String.valueOf((int)(Math.random() * 90 + 10)); // 10~99
-        return parte1 + parte2;
+        String parte3 = String.valueOf((int)(Math.random() * 90 + 10)); // 10~99
+
+        
+        return parte1 + parte2 + parte3;
     }
 
 

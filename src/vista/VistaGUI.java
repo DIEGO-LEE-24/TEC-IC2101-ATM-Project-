@@ -197,7 +197,10 @@ private JPanel crearPanelCrearCuenta() {
             String id = txtId.getText().trim();
             long deposito = Long.parseLong(txtMonto.getText().trim());
 
-            String pinGenerado = Validacion.generarPinToken();  
+            String pinGenerado = Validacion.generarPinToken();
+            
+            JOptionPane.showMessageDialog(this, pinGenerado);
+            
             ctrl.crearCuenta(id, pinGenerado, deposito);
 
             JOptionPane.showMessageDialog(this,

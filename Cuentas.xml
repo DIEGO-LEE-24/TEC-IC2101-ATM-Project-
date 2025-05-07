@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cuentas>
+    <cuenta>
+        <numeroCuenta>CTA1</numeroCuenta>
+        <fechaCreacion/>
+        <estatus>ACTIVA</estatus>
+        <saldo>3200</saldo>
+        <dueno>
+            <email>es@gmail.com</email>
+            <identificacion>2</identificacion>
+            <nombreCompleto>a</nombreCompleto>
+            <telefono>11111111</telefono>
+        </dueno>
+        <pinCifrado>287324</pinCifrado>
+        <intentosRestantes>3</intentosRestantes>
+        <transacciones/>
+        <transacciones/>
+    </cuenta>
+    <cuenta>
+        <numeroCuenta>CTA2</numeroCuenta>
+        <fechaCreacion/>
+        <estatus>ACTIVA</estatus>
+        <saldo>2000</saldo>
+        <dueno>
+            <email>es@gmail.com</email>
+            <identificacion>2</identificacion>
+            <nombreCompleto>a</nombreCompleto>
+            <telefono>11111111</telefono>
+        </dueno>
+        <pinCifrado>391022</pinCifrado>
+        <intentosRestantes>3</intentosRestantes>
+        <transacciones/>
+    </cuenta>
+</cuentas>

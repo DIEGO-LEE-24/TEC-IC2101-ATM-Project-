@@ -6,24 +6,46 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Representa una cuenta bancaria en colones. Gestiona PIN cifrado,
  * bloqueos tras intentos fallidos, depósito, retiro con comisión y
  * registro de transacciones.
  */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Cuenta {
     private static final AtomicInteger SECUENCIA = new AtomicInteger(0);
 
-    private final String numeroCuenta;
-    private final LocalDateTime fechaCreacion;
+    @XmlElement
+    private String numeroCuenta;
+    
+    @XmlElement
+    private LocalDateTime fechaCreacion;
+    
+    @XmlElement
     private EstadoCuenta estatus;
-    private long saldo;  // en colones, sin decimales
-    private final Cliente dueno;
+    
+    @XmlElement
+    private long saldo;
+    
+    @XmlElement
+    private Cliente dueno;
+    
+    @XmlElement
     private String pinCifrado;
     private int intentosRestantes;
     private final List<Transaccion> transacciones = new ArrayList<>();
-
+    
+    
+    public Cuenta() {
+        // JAXB necesita constructor sin argumentos
+    }
+    
     /**
      * Crea una nueva cuenta con PIN válido y depósito inicial.
      *
@@ -45,7 +67,10 @@ public class Cuenta {
         this.numeroCuenta = "CTA" + SECUENCIA.incrementAndGet();
         this.fechaCreacion = LocalDateTime.now();
         this.estatus = EstadoCuenta.ACTIVA;
-        this.pinCifrado = Cifrado.encrypt(pinPlano);
+        // NO ESTA ENCRIPTANDO > ERROR
+        //this.pinCifrado = Cifrado.encrypt(pinPlano);
+        this.pinCifrado = pinPlano;
+        // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx
         this.intentosRestantes = 3;
         this.saldo = 0;
         // registra depósito inicial como transacción sin comisión

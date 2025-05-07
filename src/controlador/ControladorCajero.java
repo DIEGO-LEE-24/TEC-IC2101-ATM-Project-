@@ -53,13 +53,24 @@ public class ControladorCajero {
      * @throws IllegalArgumentException Si el cliente no existe
      */
 
-    private Cliente buscarCliente(String idCliente) {
-        return clientes.stream()
-            .filter(c -> c.getIdentificacion().equals(idCliente))
-            .findFirst()
-            .orElseThrow(() ->
-                new IllegalArgumentException("Debe crear el cliente antes de crear una cuenta."));
-    }
+private Cliente buscarCliente(String idCliente) {
+   
+    // Buscar el cliente
+    return clientes.stream()
+        .peek(c -> System.out.println("Comparando con cliente ID: " + c.getIdentificacion()))
+        .filter(c -> {
+            if (c.getIdentificacion() == null) {
+                System.out.println("¡ADVERTENCIA! Cliente con ID nulo encontrado: ");
+                return false;
+            }
+            return c.getIdentificacion().equals(idCliente);
+        })
+        .findFirst()
+        .orElseThrow(() -> {
+            System.err.println("ERROR: No se encontró cliente con ID: " + idCliente);
+            return new IllegalArgumentException("Debe crear el cliente antes de crear una cuenta.");
+        });
+}
 
     /**
      * Busca una cuenta por su número.
@@ -91,8 +102,10 @@ public class ControladorCajero {
      * @throws Exception Si ocurre un error durante el guardado
      */
     private void guardarCuentas() throws Exception {
+
         persistencia.guardarCuentas(cuentas);
         for (Cuenta c : cuentas) {
+            System.out.println(c.getPinCifrado());
             persistencia.guardarTransacciones(
                 c.getNumeroCuenta(),
                 c.getTransacciones()
@@ -169,12 +182,12 @@ public class ControladorCajero {
      */   
     public void crearCuenta(String id, String pin, long monto) throws Exception {
         Cliente cliente = buscarCliente(id);  
-
+        
         if (!Validacion.validarPin(pin)) {   
             throw new IllegalArgumentException("Formato de PIN inválido");
         }
 
-        Cuenta nueva = new Cuenta(cliente, pin, monto);  
+        Cuenta nueva = new Cuenta(cliente, pin, monto);
         cuentas.add(nueva);
         guardarCuentas();
     }
