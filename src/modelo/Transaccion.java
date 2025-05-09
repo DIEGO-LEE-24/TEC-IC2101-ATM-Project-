@@ -2,6 +2,8 @@ package modelo;
 
 import java.time.LocalDateTime;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import util.LocalDateTimeAdapter;
 
 /**
  * Representa una transacción realizada sobre una cuenta bancaria:
@@ -11,6 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Transaccion {
     private TipoTransaccion tipo;
     private long monto;               // Monto en colones (o equivalente en colones)
+    @XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
     private LocalDateTime fecha;
     private boolean cobroComision;
     private long montoComision;       // 0 si no hubo cobro

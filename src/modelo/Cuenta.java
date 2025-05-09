@@ -3,6 +3,8 @@ package modelo;
 import excepciones.PinInvalidoException;
 import excepciones.SaldoInsuficienteException;
 import java.time.LocalDateTime;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import util.LocalDateTimeAdapter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -25,6 +27,7 @@ public class Cuenta {
     private String numeroCuenta;
     
     @XmlElement
+    @XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
     private LocalDateTime fechaCreacion;
     
     @XmlElement
@@ -193,7 +196,7 @@ public class Cuenta {
      * @return Una copia inmutable de la lista de transacciones de la cuenta
      */
     public List<Transaccion> getTransacciones() {
-        return List.copyOf(transacciones);
+        return transacciones;
     }
 
     /**
