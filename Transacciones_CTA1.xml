@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <transacciones>
-    <transaccion/>
-    <transaccion/>
+    <transaccion>
+        <fecha>2025-05-09T19:32:19.210739</fecha>
+    </transaccion>
+    <transaccion>
+        <fecha>2025-05-09T19:33:08.2582913</fecha>
+    </transaccion>
 </transacciones>

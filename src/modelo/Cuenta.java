@@ -71,8 +71,7 @@ public class Cuenta {
         this.fechaCreacion = LocalDateTime.now();
         this.estatus = EstadoCuenta.ACTIVA;
         // NO ESTA ENCRIPTANDO > ERROR
-        //this.pinCifrado = Cifrado.encrypt(pinPlano);
-        this.pinCifrado = pinPlano;
+        this.pinCifrado = Cifrado.encrypt(pinPlano);
         // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx
         this.intentosRestantes = 3;
         this.saldo = 0;
@@ -206,10 +205,17 @@ public class Cuenta {
      * @return true si el PIN coincide
      */
     public boolean verificarPin(String pinPlano) {
+        
         if (estatus == EstadoCuenta.INACTIVA) {
             return false;
         }
+                System.out.println(pinCifrado);
+
         String actual = Cifrado.decrypt(pinCifrado);
+        
+        System.out.println(actual);
+        System.out.println(pinPlano);
+
         if (actual.equals(pinPlano)) {
             intentosRestantes = 3;
             return true;

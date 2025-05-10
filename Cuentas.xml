@@ -2,33 +2,42 @@
 <cuentas>
     <cuenta>
         <numeroCuenta>CTA1</numeroCuenta>
-        <fechaCreacion/>
+        <fechaCreacion>2025-05-09T19:32:19.039005</fechaCreacion>
         <estatus>ACTIVA</estatus>
-        <saldo>3200</saldo>
+        <saldo>20200</saldo>
         <dueno>
-            <email>es@gmail.com</email>
+            <email>mohamehd@gmail.com</email>
             <identificacion>2</identificacion>
-            <nombreCompleto>a</nombreCompleto>
-            <telefono>11111111</telefono>
+            <nombreCompleto>Eyden Mohamed Su</nombreCompleto>
+            <telefono>88118811</telefono>
         </dueno>
-        <pinCifrado>287324</pinCifrado>
+        <pinCifrado>ICHiqL9/yeorxS+/CGgbl0ujdb6YKtNFuCQzOg5yc7E=</pinCifrado>
         <intentosRestantes>3</intentosRestantes>
-        <transacciones/>
-        <transacciones/>
+        <transacciones>
+            <fecha>2025-05-09T19:32:19.210739</fecha>
+        </transacciones>
+        <transacciones>
+            <fecha>2025-05-09T19:33:08.2582913</fecha>
+        </transacciones>
     </cuenta>
     <cuenta>
         <numeroCuenta>CTA2</numeroCuenta>
-        <fechaCreacion/>
+        <fechaCreacion>2025-05-09T19:32:36.0638123</fechaCreacion>
         <estatus>ACTIVA</estatus>
-        <saldo>2000</saldo>
+        <saldo>19800</saldo>
         <dueno>
-            <email>es@gmail.com</email>
+            <email>mohamehd@gmail.com</email>
             <identificacion>2</identificacion>
-            <nombreCompleto>a</nombreCompleto>
-            <telefono>11111111</telefono>
+            <nombreCompleto>Eyden Mohamed Su</nombreCompleto>
+            <telefono>88118811</telefono>
         </dueno>
-        <pinCifrado>391022</pinCifrado>
+        <pinCifrado>KXbaP+PGL8wKqDFtxj2Wip13nD/vIPLYesvYjQSXCjg=</pinCifrado>
         <intentosRestantes>3</intentosRestantes>
-        <transacciones/>
+        <transacciones>
+            <fecha>2025-05-09T19:32:36.0648306</fecha>
+        </transacciones>
+        <transacciones>
+            <fecha>2025-05-09T19:33:08.2582913</fecha>
+        </transacciones>
     </cuenta>
 </cuentas>

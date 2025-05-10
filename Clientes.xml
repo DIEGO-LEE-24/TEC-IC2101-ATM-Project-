@@ -16,14 +16,20 @@
     </cliente>
     <cliente>
         <email>mohamehd@gmail.com</email>
-        <identificacion>10110017</identificacion>
+        <identificacion>2</identificacion>
         <nombreCompleto>Eyden Mohamed Su</nombreCompleto>
         <telefono>88118811</telefono>
     </cliente>
     <cliente>
-        <email>es@gmail.com</email>
-        <identificacion>2</identificacion>
-        <nombreCompleto>a</nombreCompleto>
-        <telefono>11111111</telefono>
+        <email>alex@gmail.com</email>
+        <identificacion>701230123</identificacion>
+        <nombreCompleto>alex hernandez</nombreCompleto>
+        <telefono>86529124</telefono>
+    </cliente>
+    <cliente>
+        <email>de@gmail.com</email>
+        <identificacion>701230123</identificacion>
+        <nombreCompleto>Ale</nombreCompleto>
+        <telefono>86529124</telefono>
     </cliente>
 </clientes>

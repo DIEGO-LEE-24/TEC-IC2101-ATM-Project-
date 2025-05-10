@@ -199,7 +199,6 @@ private JPanel crearPanelCrearCuenta() {
 
             String pinGenerado = Validacion.generarPinToken();
             
-            JOptionPane.showMessageDialog(this, pinGenerado);
             
             ctrl.crearCuenta(id, pinGenerado, deposito);
 
@@ -454,48 +453,96 @@ private JPanel crearPanelHistorial() {
     p.addPair("", ok);
     return p;
 }
-
-   private JPanel crearPanelTransferir() {
+private JPanel crearPanelTransferir() {
     GridLayoutPanel p = new GridLayoutPanel(6);
-    JTextField txtOrigen  = new JTextField();
+    JTextField txtOrigen = new JTextField();
+    JButton sms = new JButton("Enviar Código");
     JPasswordField txtPin = new JPasswordField();
-    JTextField txtSms     = new JTextField();
+    JTextField txtSms = new JTextField();
     JTextField txtDestino = new JTextField();
-    JTextField txtMonto   = new JTextField();
+    JTextField txtMonto = new JTextField();
     JButton ok = new JButton("Transferir");
+
+    // Usamos un array de un elemento para simular una variable "final" mutable
+    final String[] codigo = new String[1];
+    
+    sms.addActionListener(ev -> {
+        try {
+            codigo[0] = ctrl.enviarMensaje(txtOrigen.getText().trim());
+            JOptionPane.showMessageDialog(this, 
+                "Código enviado al número registrado", 
+                "Información", 
+                JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, 
+                "Error al enviar código: " + ex.getMessage(), 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+        }
+    });
+    
     ok.addActionListener(ev -> {
         try {
+            // Validar campos obligatorios
+            if (txtOrigen.getText().trim().isEmpty() || 
+                txtPin.getPassword().length == 0 || 
+                txtSms.getText().trim().isEmpty() || 
+                txtDestino.getText().trim().isEmpty() || 
+                txtMonto.getText().trim().isEmpty()) {
+                throw new IllegalArgumentException("Todos los campos son obligatorios");
+            }
+            
             ctrl.transferir(
                 txtOrigen.getText().trim(),
                 new String(txtPin.getPassword()).trim(),
                 txtSms.getText().trim(),
                 txtDestino.getText().trim(),
-                Long.parseLong(txtMonto.getText().trim())
+                Long.parseLong(txtMonto.getText().trim()),
+                codigo[0] // Usamos el código almacenado
             );
+            
             JOptionPane.showMessageDialog(this,
-                "Transferencia realizada con éxito.");
+                "Transferencia realizada con éxito.",
+                "Éxito",
+                JOptionPane.INFORMATION_MESSAGE);
             mostrarCard(MENU);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, 
+                "El monto debe ser un número válido", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
             String msg = ex.getMessage();
             if (msg != null && msg.toLowerCase().contains("bloqueada")) {
-                JOptionPane.showMessageDialog(this, "⚠️ Cuenta bloqueada. Se enviará una notificación al correo del cliente.");
+                JOptionPane.showMessageDialog(this, 
+                    "⚠️ Cuenta bloqueada. Se enviará una notificación al correo del cliente.",
+                    "Cuenta Bloqueada",
+                    JOptionPane.WARNING_MESSAGE);
                 // Simulación de correo + SMS
                 System.out.println("📧 Enviando email al cliente...");
                 System.out.println("📱 Enviando SMS de bloqueo al número registrado...");
             } else {
-                JOptionPane.showMessageDialog(this, msg, "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, 
+                    msg != null ? msg : "Error desconocido", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
             }
         }   
     });
 
-    p.addPair("Cuenta Origen:",   txtOrigen);
-    p.addPair("PIN:",              txtPin);
-    p.addPair("Código SMS:",       txtSms);
-    p.addPair("Cuenta Destino:",   txtDestino);
-    p.addPair("Monto (₡):",        txtMonto);
-    p.addPair("",                  ok);
+    p.addPair("Cuenta Origen:", txtOrigen);
+    p.addPair("PIN:", txtPin);
+    p.addPair("Código SMS:", txtSms);
+    p.addPair("Cuenta Destino:", txtDestino);
+    p.addPair("Monto (₡):", txtMonto);
+    p.addPair("", new JPanel() {{
+        add(sms);
+        add(ok);
+    }});
+    
     return p;
 }
+
 private JPanel crearPanelEstadoCuenta() {
     GridLayoutPanel p = new GridLayoutPanel(4);
     JTextField txtCuenta = new JTextField();

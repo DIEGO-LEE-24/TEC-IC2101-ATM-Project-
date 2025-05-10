@@ -57,10 +57,8 @@ private Cliente buscarCliente(String idCliente) {
    
     // Buscar el cliente
     return clientes.stream()
-        .peek(c -> System.out.println("Comparando con cliente ID: " + c.getIdentificacion()))
         .filter(c -> {
             if (c.getIdentificacion() == null) {
-                System.out.println("¡ADVERTENCIA! Cliente con ID nulo encontrado: ");
                 return false;
             }
             return c.getIdentificacion().equals(idCliente);
@@ -105,7 +103,6 @@ private Cliente buscarCliente(String idCliente) {
 
         persistencia.guardarCuentas(cuentas);
         for (Cuenta c : cuentas) {
-            System.out.println(c.getPinCifrado());
             persistencia.guardarTransacciones(
                 c.getNumeroCuenta(),
                 c.getTransacciones()
@@ -393,22 +390,34 @@ private Cliente buscarCliente(String idCliente) {
                           String pin,
                           String codigoSms,
                           String ctaDestino,
-                          long monto) throws Exception {
+                          long monto,
+                          String codigo) throws Exception {
         Cuenta origen  = buscarCuenta(ctaOrigen);
         Cuenta destino = buscarCuenta(ctaDestino);
+        if (!codigoSms.equals(codigo)) {
+            throw new IllegalArgumentException("Código SMS inválido");
+        }
         if (!origen.getDueno().getIdentificacion().equals(destino.getDueno().getIdentificacion())) {
             throw new IllegalArgumentException("Cuentas de distinto titular");
         }
+        
+        System.out.println("sds");
+        
         if (!origen.verificarPin(pin)) {
             throw new PinInvalidoException("PIN incorrecto o cuenta bloqueada");
         }
-        String enviado = ServicioSMS.enviarCodigo(origen.getDueno().getTelefono());
-        if (!codigoSms.equals(enviado)) {
-            throw new IllegalArgumentException("Código SMS inválido");
-        }
+        
+                System.out.println("sds");
+
         origen.retirar(monto);
         destino.depositar(monto);
         guardarCuentas();
+    }
+    
+    public String enviarMensaje(String origen) {
+        Cuenta ctaOrigen  = buscarCuenta(origen);
+        String enviado = ServicioSMS.enviarCodigo(ctaOrigen.getDueno().getTelefono());
+        return enviado;
     }
 
     /**
